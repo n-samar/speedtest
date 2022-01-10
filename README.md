@@ -32,7 +32,7 @@ Generate up-to-date graphs by running:
 python3 plot_speedtest.py
 ```
 
-This will create a `speedtest.pdf` file in this repos plots folder.
+This will create a `speedtest.pdf` file in this repo's `plots` folder.
 
 If you want to generate the report only for the last `N` minutes, run:
 
