@@ -3,7 +3,9 @@ download bandwidth, upload bandwidth, and latency. The tool gathers metrics by
 running a speedtest on speedtest.net for each minute the computer is awake.
 
 This data is aggregated and reported as a single pdf with cummulative density
-(CDF) and timeseries summaries for each metric.
+(CDF) and timeseries summaries for each metric:
+
+![example](assets/speedtest.png)
 
 The advantage of this tool over a speedtest is that the data is aggregated across
 an arbitrary amount of time. This can help you convince your ISP that you actually
