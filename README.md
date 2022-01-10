@@ -1,4 +1,3 @@
-
 This is a tool that will measure and report metrics relevant to internet usage:
 download bandwidth, upload bandwidth, and latency. The tool gathers metrics by
 running a speedtest on speedtest.net for each minute the computer is awake.
@@ -8,7 +7,8 @@ This data is aggregated and reported as a single pdf with cummulative density
 
 The advantage of this tool over a speedtest is that the data is aggregated across
 an arbitrary amount of time. This can help you convince your ISP that you actually
-do have a problem, even when the operator comes and the internet randomly happens
+do have a problem, even when the ISP operator comes to your home and the
+internet randomly happens
 to be working when they are there.
 
 # Setup
