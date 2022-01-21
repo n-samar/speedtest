@@ -38,6 +38,14 @@ bw_ups = [ float(elem[bw_up_idx]) / bits_per_Mb for elem in results ]
 datetimes = [ datetime.datetime.strptime(elem, '%Y-%m-%dT%H:%M:%S.%f%z') for elem in times ]
 date_nums = matplotlib.dates.date2num(datetimes)
 
+missing_datetimes = []
+
+for idx in range(len(datetimes) - 1):
+    curr_date = datetimes[idx] + datetime.timedelta(0, 60)
+    while curr_date + datetime.timedelta(0, 30) < datetimes[idx+1]:
+        missing_datetimes.append(curr_date)
+        curr_date += datetime.timedelta(0, 60)
+
 ping_max = max(1.05*max(pings), latency_threshold*1.1)
 bw_up_max = max(1.05*max(bw_ups), up_threshold)
 bw_down_max = max(1.05*max(bw_downs), down_threshold)
@@ -59,6 +67,8 @@ ax_ping.plot_date(date_nums, pings)
 ax_ping.set_title("Latency")
 ax_ping.set_xlabel("Time")
 ax_ping.set_ylabel("Milliseconds")
+for missing_datetime in missing_datetimes:
+    ax_ping.axvline(x=missing_datetime, color="red")
 ax_ping.axhline(latency_threshold, color="red")
 ax_ping.set_ylim(ymin = 0)
 ax_ping.set_ylim(ymax = ping_max)
@@ -69,12 +79,16 @@ ax_bw_down.fill_between(date_nums, 0, down_threshold, color="red", alpha=0.5)
 ax_bw_down.set_title("Download")
 ax_bw_down.set_xlabel("Time")
 ax_bw_down.set_ylabel("Mbits per second")
+for missing_datetime in missing_datetimes:
+    ax_bw_down.axvline(x=missing_datetime, color="red")
 ax_bw_down.axhline(down_threshold, color="red")
 ax_bw_down.set_ylim(ymin = 0)
 
 ax_bw_up.plot_date(date_nums, bw_ups)
 ax_bw_up.set_xlim((min(date_nums), max(date_nums)))
 ax_bw_up.fill_between(date_nums, 0, up_threshold, color="red", alpha=0.5)
+for missing_datetime in missing_datetimes:
+    ax_bw_up.axvline(x=missing_datetime, color="red")
 ax_bw_up.set_title("Upload")
 ax_bw_up.set_ylabel("Mbits per second")
 ax_bw_up.set_xlabel("Time")
